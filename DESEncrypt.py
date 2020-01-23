@@ -54,14 +54,16 @@ for i in range(len(Kn)):
 Paquetage de binaries
 """
 Mn = Tools.wrap(binaries)
+chunks = list()
+
 for chunk in Mn:
     """
-    Permuter par PI de Mn
+    Permutation de PI de Mn
     """
-    P1_M1 = Tools.permutation(chunk, PI)
+    PI_Mn = Tools.permutation(chunk, PI)
 
-    G = P1_M1[0:32]
-    D = P1_M1[32:64]
+    G = PI_Mn[0:32]
+    D = PI_Mn[32:64]
 
     for i in range(16):
         """
@@ -120,5 +122,6 @@ for chunk in Mn:
     """
     Permutation de Mn_ par PI_I
     """
-    PI_I_Mn_ = Tools.permutation(Mn_, PI_I)
-    print(Tools.toString(PI_I_Mn_))
+    chunks += Tools.permutation(Mn_, PI_I)
+
+print(Tools.toString(chunks))
