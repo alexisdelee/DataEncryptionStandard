@@ -1,9 +1,13 @@
 import numpy
+import Extract_ConstantesDES
 
-def permutation(source, by):
-    dest = by[:]
+def constants():
+    return Extract_ConstantesDES.recupConstantesDES()
 
-    for i, bit in enumerate(by):
+def permutation(source, by, n):
+    dest = [0 for char in by[:n]]
+
+    for i, bit in enumerate(by[:n]):
         dest[i] = source[bit]
 
     return dest

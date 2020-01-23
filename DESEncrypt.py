@@ -1,4 +1,3 @@
-import Extract_ConstantesDES
 import Tools
 
 key = "0101111001011011010100100111111101010001000110101011110010010001"
@@ -19,7 +18,7 @@ K = key[0:7]        \
 
 binaries = [int(char) for char in binaries]
 
-constants = Extract_ConstantesDES.recupConstantesDES()
+constants = Tools.constants()
 
 PI   = constants["PI"][0]
 PI_I = constants["PI_I"][0]
@@ -29,11 +28,10 @@ CP_2 = constants["CP_2"][0]
 S    = constants["S"]
 PERM = constants["PERM"][0]
 
-
 """
 Permuter key avec CP_1
 """
-CP_1_K = Tools.permutation(key, CP_1)
+CP_1_K = Tools.permutation(key, CP_1, 64)
 
 G = CP_1_K[0:28]
 D = CP_1_K[28:56]
@@ -48,7 +46,7 @@ for i in range(len(Kn)):
     G = Tools.leftShift(G)
     D = Tools.leftShift(D)
 
-    Kn[i] = Tools.permutation(G + D, CP_2)
+    Kn[i] = Tools.permutation(G + D, CP_2, 56)
 
 """
 Paquetage de binaries
@@ -60,7 +58,7 @@ for chunk in Mn:
     """
     Permutation de PI de Mn
     """
-    PI_Mn = Tools.permutation(chunk, PI)
+    PI_Mn = Tools.permutation(chunk, PI, 64)
 
     G = PI_Mn[0:32]
     D = PI_Mn[32:64]
@@ -69,7 +67,7 @@ for chunk in Mn:
         """
         Permutation de E par D (expension sur 48 bits)
         """
-        ED = Tools.permutation(D, E)
+        ED = Tools.permutation(D, E, 48)
 
         """
         Calculer ED ^ Kn
@@ -107,7 +105,7 @@ for chunk in Mn:
         """
         Permutation de SEDXorKn par PERM
         """
-        PSEDXorKn = Tools.permutation(SEDXorKn, PERM)
+        PSEDXorKn = Tools.permutation(SEDXorKn, PERM, 32)
 
         """
         Calculer PSEDXorKn ^ G
@@ -122,6 +120,6 @@ for chunk in Mn:
     """
     Permutation de Mn_ par PI_I
     """
-    chunks += Tools.permutation(Mn_, PI_I)
+    chunks += Tools.permutation(Mn_, PI_I, 64)
 
 print(Tools.toString(chunks))

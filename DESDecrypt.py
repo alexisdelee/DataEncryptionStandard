@@ -1,13 +1,17 @@
-import Extract_ConstantesDES
 import Tools
 
 key = "0101111001011011010100100111111101010001000110101011110010010001"
 binaries = "10001000001101101010000100010011110010110110000010010100100100000010011101110000010110100010000000001101000100011100011011000100"
 
+if len(key) != 64:
+    raise Exception("The key must be 64-bit size")
+elif len(binaries) % 64 != 0:
+    raise Exception("The message must be 64-bit size proportion")
+
 key = [int(char) for char in key]
 binaries = [int(char) for char in binaries]
 
-constants = Extract_ConstantesDES.recupConstantesDES()
+constants = Tools.constants()
 
 PI   = constants["PI"][0]
 PI_I = constants["PI_I"][0]
@@ -20,7 +24,7 @@ PERM = constants["PERM"][0]
 """
 Permuter key avec CP_1
 """
-CP_1_K = Tools.permutation(key, CP_1)
+CP_1_K = Tools.permutation(key, CP_1, 64)
 
 G = CP_1_K[0:28]
 D = CP_1_K[28:56]
@@ -35,7 +39,7 @@ for i in range(len(Kn)):
     G = Tools.leftShift(G)
     D = Tools.leftShift(D)
 
-    Kn[i] = Tools.permutation(G + D, CP_2)
+    Kn[i] = Tools.permutation(G + D, CP_2, 56)
 
 """
 Paquetage de binaries
@@ -50,7 +54,7 @@ for chunk in Mn:
     """
     Permutation de PI par PI_Mn_
     """
-    Mn_ = Tools.permutation(PI_Mn_, PI)
+    Mn_ = Tools.permutation(PI_Mn_, PI, 64)
 
     G = Mn_[0:32]
     D = Mn_[32:64]
@@ -61,7 +65,7 @@ for chunk in Mn:
         """
         Permutation de E par G (expension sur 48 bits)
         """
-        ED = Tools.permutation(G, E)
+        ED = Tools.permutation(G, E, 48)
 
         """
         Calculer ED ^ Kn
@@ -99,7 +103,7 @@ for chunk in Mn:
         """
         Permutation de SEDXorKn par PERM
         """
-        PSEDXorKn = Tools.permutation(SEDXorKn, PERM)
+        PSEDXorKn = Tools.permutation(SEDXorKn, PERM, 32)
 
         D = G[:]
         """
@@ -112,6 +116,6 @@ for chunk in Mn:
     """
     Permutation de PI_I par Mn_
     """
-    chunks += Tools.permutation(Mn_, PI_I)
+    chunks += Tools.permutation(Mn_, PI_I, 64)
 
 print(Tools.toString(chunks))
