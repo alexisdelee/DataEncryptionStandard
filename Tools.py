@@ -25,9 +25,12 @@ def leftShift(arrayA):
 def wrap(binaries):
     size = len(binaries)
     packs = int(size / 64)
-    binaries += [0 for i in range(((packs + 1) * 64 - size) % 64)]
 
-    return numpy.array_split(binaries, packs + 1)
+    if size % 64 > 0:
+        binaries += [0 for i in range(((packs + 1) * 64 - size) % 64)]
+        packs += 1
+
+    return numpy.array_split(binaries, packs)
 
 """
 def expansion(source, by):
