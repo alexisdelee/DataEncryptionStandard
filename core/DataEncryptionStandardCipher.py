@@ -1,4 +1,5 @@
-import Tools
+from core import Tools
+
 
 def run(key, binaries):
     if len(key) != 64:
