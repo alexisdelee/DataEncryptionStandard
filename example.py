@@ -1,8 +1,8 @@
 import glob
 import re
 
-import DataEncryptionStandard
 import ConvAlphaBin
+import DataEncryptionStandard
 
 """
 Test 1
@@ -14,6 +14,11 @@ encrypted_binaries = DataEncryptionStandard.compute(key, binaries, DataEncryptio
 decrypted_binaries = DataEncryptionStandard.compute(key, encrypted_binaries, DataEncryptionStandard.Method.Decipher)
 
 assert binaries in decrypted_binaries, "[Test 1] Messages are different"
+
+binaries = DataEncryptionStandard.compute("0101111001011011010100100111111101010001000110101011110010010001", ConvAlphaBin.conv_bin("toto"), DataEncryptionStandard.Method.Cipher)
+print(binaries)
+# print(ConvAlphaBin.nib_vnoc(DataEncryptionStandard.compute("0101111001011011010100100111111101010001000110101011110010010001", "000000011001010010111100100101010100010001011000111011100000100000", DataEncryptionStandard.Method.Decipher)))
+exit()
 
 """
 Test 2
