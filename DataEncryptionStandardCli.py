@@ -18,7 +18,7 @@ def pretty_message(args):
     elif args.file:
         message = get_content(args.file, args.encoding)
 
-    return message.strip()
+    return message.rstrip()
 
 
 parser = argparse.ArgumentParser()
@@ -49,8 +49,8 @@ if args.cipher:
 
     # after python 3.7: sys.stdout.reconfigure(encoding=args.encoding)
     sys.stdout = codecs.getwriter(args.encoding)(sys.stdout.detach())
-    print(encrypted_binaries)
     sys.stdout.write(ConvAlphaBin.nib_vnoc(encrypted_binaries))
+    # print(ConvAlphaBin.nib_vnoc(encrypted_binaries), end="")
 elif args.decipher:
     message = pretty_message(args)
     binaries = ConvAlphaBin.conv_bin(message)
@@ -62,6 +62,7 @@ elif args.decipher:
     # after python 3.7: sys.stdout.reconfigure(encoding=args.encoding)
     sys.stdout = codecs.getwriter(args.encoding)(sys.stdout.detach())
     sys.stdout.write(ConvAlphaBin.nib_vnoc(decrypted_binaries))
+    # print(ConvAlphaBin.nib_vnoc(encrypted_binaries), end="")
 
 # echo toto | python DataEncryptionStandardCli.py --stdin --cipher --key="0101111001011011010100100111111101010001000110101011110010010001" > cipher.txt
 # python DataEncryptionStandardCli.py --message="toto" --cipher --key="0101111001011011010100100111111101010001000110101011110010010001" > cipher.txt
