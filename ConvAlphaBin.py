@@ -30,7 +30,6 @@ for i in range(0, 64):
     for k in range(-6, 0, 1):
         ALPHABETBINAIRE[i] += y[k]
 
-
 # Renvoie la chaine de caractère txt avec uniquement les caractères de l'alphabet.
 def FiltreTXT(txt):
     res = ""
@@ -62,19 +61,20 @@ def FiltreTXT(txt):
 
     return res
 
+def fix_size(txt):
+    return txt[:64 * int(len(txt) / 64)]
 
 # Prend en paramètre un texte et renvoie la chaine binaire associée (en suivant le dictionnaire)
-def conv_bin(txt):
+def conv_bin(txt, fix=False):
     X = ""
     for c in FiltreTXT(txt):
         i = ALPHABET.find(c)
         if i != -1: X += ALPHABETBINAIRE[i]
 
-    return X
-
+    return fix_size(X) if fix else X
 
 # Fait l'inverse de conv_bin : prend une chaine binaire et renvoie les caractères
-def nib_vnoc(txt):
+def nib_vnoc(txt, fix=True):
     n = len(txt)
     res = ""
     i = 0

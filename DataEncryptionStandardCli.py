@@ -56,7 +56,7 @@ if args.cipher:
     # print(ConvAlphaBin.nib_vnoc(encrypted_binaries), end="")
 elif args.decipher:
     message = pretty_message(args)
-    binaries = ConvAlphaBin.conv_bin(message)
+    binaries = ConvAlphaBin.conv_bin(message, fix=True)
 
     key = args.key if args.key else get_content(args.key_file, args.encoding)
 

@@ -4,6 +4,8 @@ from core import Tools
 def run(key, binaries):
     if len(key) != 64:
         raise Exception("The key must be 64-bit size")
+    elif len(binaries) % 64 > 0:
+        raise Exception("The message must be 64-bit multiple size")
 
     key = [int(char) for char in key]
     binaries = [int(char) for char in binaries]

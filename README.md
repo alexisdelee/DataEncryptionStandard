@@ -25,3 +25,11 @@ echo toto | python3 DataEncryptionStandardCli.py --stdin --cipher --key="0101111
 # Windows (changer l'encodage)
 echo toto | python DataEncryptionStandardCli.py --stdin --cipher --key="0101111001011011010100100111111101010001000110101011110010010001" --encoding="ISO-8859-1" | python DataEncryptionStandardCli.py --stdin --decipher --key="0101111001011011010100100111111101010001000110101011110010010001" --encoding="ISO-8859-1"
 ```
+
+## Troubleshooting
+
+La méthode ConvAlphabin.conv_bin aggrandit le binaire de retour avec des zéros à droite quand la taille n'est pas un multiple de 6, ce qui résulte au plantage de la méthode de déchiffrement.  
+
+Pour pallier ce problème, il suffit d'activer le paramètre fix=True au binaire passé à la méthode DataEncryptionStandard.compute dans le cas du déchiffrement.  
+
+PS : DataEncryptionStandardCli prend en déjà en compte la correction.  

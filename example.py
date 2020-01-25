@@ -15,11 +15,6 @@ decrypted_binaries = DataEncryptionStandard.compute(key, encrypted_binaries, Dat
 
 assert binaries in decrypted_binaries, "[Test 1] Messages are different"
 
-binaries = DataEncryptionStandard.compute("0101111001011011010100100111111101010001000110101011110010010001", ConvAlphaBin.conv_bin("toto"), DataEncryptionStandard.Method.Cipher)
-print(binaries)
-# print(ConvAlphaBin.nib_vnoc(DataEncryptionStandard.compute("0101111001011011010100100111111101010001000110101011110010010001", "000000011001010010111100100101010100010001011000111011100000100000", DataEncryptionStandard.Method.Decipher)))
-exit()
-
 """
 Test 2
 """
@@ -42,7 +37,7 @@ for encrypted_filename in glob.glob("Samples/Messages/Chiffrement_DES_de_*.txt")
             key = key_file.read()
             with open(encrypted_filename, mode="r", encoding="ISO-8859-1") as encrypted_file:
                 encrypted_message = encrypted_file.read()
-                encrypted_binaries = ConvAlphaBin.conv_bin(encrypted_message)
+                encrypted_binaries = ConvAlphaBin.conv_bin(encrypted_message, fix=True)
 
                 decrypted_binaries = DataEncryptionStandard.compute(key, encrypted_binaries, DataEncryptionStandard.Method.Decipher)
                 decrypted_message = ConvAlphaBin.nib_vnoc(decrypted_binaries)
