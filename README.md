@@ -32,4 +32,4 @@ La méthode ConvAlphabin.conv_bin aggrandit le binaire de retour avec des zéros
 
 Pour pallier ce problème, il suffit d'activer le paramètre fix=True au binaire passé à la méthode DataEncryptionStandard.compute dans le cas du déchiffrement.  
 
-PS : DataEncryptionStandardCli prend en déjà en compte la correction.  
+PS : DataEncryptionStandardCli prend en compte déjà la correction.  
