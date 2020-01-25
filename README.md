@@ -13,7 +13,7 @@ echo toto > message.txt && python3 DataEncryptionStandardCli.py --file="message.
 ## Déchiffrer un exemple
 
 ```bash
-python3 DataEncryptionStandardCli.py  --decipher --file="Samples/Messages/Chiffrement_DES_de_1.txt" --key-file="Samples/Messages/Clef_de_1.txt" --encoding="ISO-8859-1"
+python3 DataEncryptionStandardCli.py  --decipher --file="Samples/Messages/Chiffrement_DES_de_1.txt" --key-file="Samples/Messages/Clef_de_1.txt"
 ```
 
 ## Windows VS Unix
