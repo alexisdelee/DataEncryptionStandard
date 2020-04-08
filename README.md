@@ -1,5 +1,9 @@
 # DataEncryptionStandard
 
+## Documentation
+
+Vous pouvez retrouvez la documentation du projet [ici](docs/DES.pdf).  
+
 ## Commandes utiles
 
 ```bash
